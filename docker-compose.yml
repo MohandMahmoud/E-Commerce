@@ -1,0 +1,45 @@
+version: "3.8"
+
+services:
+  home:
+    build:
+      context: ./home_page
+      dockerfile: Dockerfile
+    ports:
+      - "3000:3000"
+    environment:
+      MONGO_URI: mongodb://192.168.1.2:27017/tazaj
+    restart: always
+
+  cart:
+    build:
+      context: ./Cart
+      dockerfile: Dockerfile
+    ports:
+      - "4000:4000"
+    depends_on:
+      - mongodb
+    restart: "always"
+  product_catalog:
+    build:
+      context: ./product_catalog
+      dockerfile: Dockerfile
+    ports:
+      - "5079:5079"
+    environment:
+      MONGO_URI: mongodb://192.168.1.2:27017/tazaj
+    depends_on:
+      - mongodb
+    restart: "always"
+  mongodb:
+    image: mongo:latest
+    container_name: mongodb
+    ports:
+      - "27017:27017"
+    command: ["mongod"]
+    volumes:
+      - products-volume:/data/db
+  
+volumes:
+  products-volume:
+    driver: local

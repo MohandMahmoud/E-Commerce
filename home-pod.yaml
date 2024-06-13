@@ -1,0 +1,10 @@
+apiVersion: "v1"
+kind: Pod
+metadata:
+  name: home
+spec: 
+  containers:
+    - name: home
+      image: new_tazaj-home
+      ports:
+        - containerPort: 3000

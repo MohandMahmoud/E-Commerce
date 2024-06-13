@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: product-dep
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: tazaj
+  template:
+    metadata:
+      labels:
+        app: tazaj
+    spec:
+      containers:
+      - name: product-container
+        image: new_tazaj-product_catalog
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 5079

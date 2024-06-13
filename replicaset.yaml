@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: tazaj-replicaset
+spec:
+  selector:
+    matchLabels:
+      app: tazaj-online
+  template:
+    metadata:
+      labels:
+        app: tazaj-online
+    spec:
+      containers:
+        - name: tazaj-home-container
+          image: new_tazaj-home
+          ports:
+            - containerPort : 3000
+        - name: tazaj-cart-container
+          image: new_tazaj-cart
+          ports:
+            - containerPort: 4000
+        - name: tazaj-prod-container
+          image: new_tazaj-product_catalog
+          ports:
+            - containerPort: 5079

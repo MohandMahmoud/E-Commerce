@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: prod-cat
+  labels:
+    app: tazaj
+spec: 
+  containers:
+    - name: prod-cat
+      image: new_tazaj-product_catalog
+      ports:
+        - containerPort: 5079
